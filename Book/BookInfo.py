@@ -1,5 +1,6 @@
 import os
 import socket
+from configparser import ConfigParser
 
 #---ESCOLHER O ATIVO EXEMPLO:-----------#
 # PETR4  - Petrobras
@@ -8,13 +9,18 @@ import socket
 # INDQ19 - Indice Bovespa
 # WINQ19 - Mini Indice Bovespa
 #========================================#
-ATIVO = "DOLU20"
+ATIVO = "WINV20"
 #========================================#
 
 #---INFORMACOES DO SERVIDOR--------------#
 #========================================#
-HOST = "127.0.0.1"
-PORT = 12002
+# Faz leitura do arquivo de configuração
+config_object = ConfigParser()
+config_object.read("../config.ini")
+
+serverdata = config_object["SERVERCONFIG"]
+HOST = serverdata["host"]
+PORT = int(serverdata["port"])
 #========================================#
 
 #---OPCAO DE COTACAO---------------------#

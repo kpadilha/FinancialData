@@ -1,7 +1,8 @@
 import socket
-import win32api
+#import win32api
 import TypeDataTryd as tdt
 from TimesAndTrades.OutputTimesTrades import OutputTimesTrades
+from configparser import ConfigParser
 
 #---ESCOLHER O ATIVO EXEMPLO:-----------#
 # PETR4  - Petrobras
@@ -15,8 +16,16 @@ ATIVO = 'WINM20'
 
 #---INFORMACOES DO SERVIDOR--------------#
 #========================================#
-HOST = '127.0.0.1'
-PORT = 12002
+# Faz leitura do arquivo de configuração
+config_object = ConfigParser()
+config_object.read("config.ini")
+
+serverdata = config_object["SERVERCONFIG"]
+HOST = serverdata["host"]
+PORT = int(serverdata["port"])
+
+#HOST = '127.0.0.1'
+#PORT = 12002
 #========================================#
 
 #---OPCAO DE COTACAO---------------------#
@@ -32,7 +41,7 @@ ott = OutputTimesTrades()
 try:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
-        print("Id da thread principal %d" % (win32api.GetCurrentThreadId()))
+#        print("Id da thread principal %d" % (win32api.GetCurrentThreadId()))
         data = b''
         while True:
             try:

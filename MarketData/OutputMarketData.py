@@ -6,7 +6,7 @@ class OutputMarketData:
         #--Inicia o COLORAMA para o texto sair---# 
         # colorido no console (firula...!!!)
         init()  
-        clear = lambda: os.system('cls')
+        clear = lambda: os.system('clear')
         clear() 
         #========================================#
 
